@@ -13,8 +13,5 @@ public class UsePilha {
 		nova.empilha(2);
 		nova.empilha(4);
 		nova.ordernarPilha(nova);
-		
-		
 	}
-
 }

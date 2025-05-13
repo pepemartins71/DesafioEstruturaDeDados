@@ -9,7 +9,10 @@ public class UsePilha {
 		String texto = "ESTE EXERCÍCIO É MUITO FÁCIL.";
 		Pilha nova = new Pilha();
 		nova.empilha(texto);
+		
 		nova.inverter(texto);
+		
+		
 	}
 
 }

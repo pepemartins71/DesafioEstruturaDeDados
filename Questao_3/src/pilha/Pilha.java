@@ -2,10 +2,21 @@ package pilha;
 
 public class Pilha {
 
-	private Elemento topo = null;
+	public Elemento topo;
+	public Pilha proximo;
 
 	public Pilha() {
+		topo = null;
+		proximo = null;
 	}
+	
+	public Pilha getProximo(){
+        return this.proximo;
+    }
+    
+    public void setProximo(Pilha proximo){
+        this.proximo = proximo;
+    }
 	
 	public int mostrarTopo() {
 		return topo.num;
@@ -34,25 +45,5 @@ public class Pilha {
 			topo = topo.getProximo();
 		}
 		return numTemp.num;
-	}
-	
-	public void ordernarPilha(Pilha pilha) {
-		Pilha pilhaAux = new Pilha();
-		
-		while(!pilha.estaVazio()) {
-			int temp = pilha.desempilha();
-			
-			while(!pilhaAux.estaVazio() && pilhaAux.mostrarTopo() > temp) {
-				pilha.empilha(pilhaAux.desempilha());
-			}
-			pilhaAux.empilha(temp);			
-		}
-		mostrarPilha(pilhaAux);
-	}
-	
-	public void mostrarPilha(Pilha pilhaOrdenada) {
-		while(!pilhaOrdenada.estaVazio()) {
-			System.out.println(pilhaOrdenada.desempilha());
-		}
 	}
 }

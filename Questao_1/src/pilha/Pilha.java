@@ -22,26 +22,29 @@ public class Pilha {
 	}
 
 	public String desempilha() {
-		Elemento retVal = new Elemento(" ");
+		Elemento letraTemp = new Elemento(" ");
 		if (estaVazio()) {
-			retVal.setLetra("A pilha está vazia.");
+			letraTemp.setLetra("A pilha está vazia.");
 		} else {
-			retVal = topo;
+			letraTemp = topo;
 			topo = topo.getProximo();
 		}
-		return retVal.letra;
+		return letraTemp.letra;
 	}
 	
 	public void inverter(String texto) {
 		Pilha pilhaPalavra = new Pilha();
+		
 		for(int i = 0; i < texto.length(); i++) {
-			if(texto.charAt(i) != ' ' || texto.charAt(i) != '.') {
-				pilhaPalavra.empilha(String.valueOf(texto.charAt(i)));
+			char c = texto.charAt(i);
+			
+			if(c != ' ' && c != '.') {
+				pilhaPalavra.empilha(String.valueOf(c));
 			} else {
 				while(!pilhaPalavra.estaVazio()) {
-					System.out.println(pilhaPalavra.desempilha());		
+					System.out.print(pilhaPalavra.desempilha());		
 				}
-				System.out.print(texto.charAt(i));
+				System.out.print(c);
 			}
 		}
 	}
