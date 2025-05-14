@@ -36,6 +36,7 @@ public class UsePilha {
 		
 		System.out.println("----------------------");
 		
+		System.out.println("As pilhas são iguais? " + pilha.iguais(pilha, pilha2));
 		System.out.println("Transferindo elementos da pilha 1 para a pilha 2:");
 		pilha.transferirElementos(pilha, pilha2);
 		System.out.println("Pilha 2 após a transferência:");
