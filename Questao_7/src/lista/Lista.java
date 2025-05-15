@@ -1,54 +1,66 @@
 package lista;
 
 public class Lista {
-    private int tamanho;
-    private int[] lista;
+	private Elemento[] elementos;
+    private int inicio = -1;
+    private int livre = 0;
 
-    public Lista(int capacidade) {
-        this.lista = new int[capacidade];
-        this.tamanho = 0;
-    }
-
-    public void adicionar(int valor) {
-        if (tamanho < lista.length) {
-            lista[tamanho] = valor;
-            tamanho++;
-        } else {
-            System.out.println("Lista cheia");
+    public Lista(int tamanho) {
+        elementos = new Elemento[tamanho];
+        for (int i = 0; i < tamanho - 1; i++) {
+            elementos[i] = new Elemento(0, i + 1);
         }
+        elementos[tamanho - 1] = new Elemento(0, -1);
+    }
+    
+    public boolean listaVazia() {
+		return inicio == -1;
+	}
+
+    public boolean inserir(int valor) {
+        if (livre == -1) {
+            System.out.println("Lista cheia. Não é possível inserir o valor.");
+            return false;
+        }
+
+        int novoIndice = livre;
+        livre = elementos[novoIndice].proximo;
+        elementos[novoIndice].valor = valor;
+        elementos[novoIndice].proximo = inicio;
+        inicio = novoIndice;
+        return true;
     }
 
-    public void remover(int valor) {
-        int index = -1;
-        for (int i = 0; i < tamanho; i++) {
-            if (lista[i] == valor) {
-                index = i;
-                break;
+    public boolean remover(int valor) {
+        int atual = inicio;
+        int anterior = -1;
+
+        while (atual != -1) {
+            if (elementos[atual].valor == valor) {
+                if (anterior == -1) {
+                    inicio = elementos[atual].proximo;
+                } else {
+                    elementos[anterior].proximo = elementos[atual].proximo;
+                }
+                elementos[atual].proximo = livre;
+                livre = atual;
+                System.out.println("Valor " + valor + " removido com sucesso.");
+                return true;
             }
+            anterior = atual;
+            atual = elementos[atual].proximo;
         }
-        if (index != -1) {
-            for (int j = index; j < tamanho - 1; j++) {
-                lista[j] = lista[j + 1];
-            }
-            lista[tamanho - 1] = 0;
-            tamanho--;
-        } else {
-            System.out.println("Valor não encontrado");
-        }
+
+        System.out.println("Valor " + valor + " não encontrado na lista.");
+        return false;
     }
 
-    public void imprimir() {
-        for (int i = 0; i < tamanho; i++) {
-            System.out.print(lista[i] + " ");
+    public void exibirLista() {
+        int atual = inicio;
+        while (atual != -1) {
+            System.out.print(elementos[atual].valor + " -> ");
+            atual = elementos[atual].proximo;
         }
-        System.out.println();
-    }
-
-    public int tamanho() {
-        return tamanho;
-    }
-
-    public boolean estaVazia() {
-        return tamanho == 0;
+        System.out.println("null");
     }
 }
